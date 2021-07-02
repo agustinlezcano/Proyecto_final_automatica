@@ -39,6 +39,11 @@ TREF = 40;
 
 id0 = 0.5; %-0.5
 
+%Resistencias para control proporcional del modulador de torque
+Rq=29;
+Rd=33;
+R0=4;
+
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
 % figure()
 % plot(SCOPE_T,SCOPE_omega)
