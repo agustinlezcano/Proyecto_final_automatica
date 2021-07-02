@@ -44,6 +44,13 @@ Rq=29;
 Rd=33;
 R0=4;
 
+w_pos = 800;
+n = 2.5;
+Kd = Jeq*n*w_pos;
+Kp = Kd*w_pos;
+Ki = Kp*w_pos/n;
+
+
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
 % figure()
 % plot(SCOPE_T,SCOPE_omega)
