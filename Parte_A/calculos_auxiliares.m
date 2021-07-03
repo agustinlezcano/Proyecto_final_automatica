@@ -154,13 +154,13 @@ w_n = zeros(1,5);
 for i=1:5
     iq_p(i) = iq2(i)+ abs(iq2(i) - iq1(i)) * 0.01;
     iq_n(i) = iq2(i)- abs(iq2(i) - iq1(i)) * 0.01;
-    iq10(i) = (iq2(i) - iq1(i)) * 0.1;
-    iq90(i) = (iq2(i) - iq1(i)) * 0.9;
+    iq10(i) = (iq2(i) - iq1(i)) * 0.1 + iq1(i);
+    iq90(i) = (iq2(i) - iq1(i)) * 0.9 + iq1(i);
 
     w_p(i) = w2(i)+ abs(w2(i) - w1(i)) * 0.01;
     w_n(i) = w2(i)- abs(w2(i) - w1(i)) * 0.01;
-    w10(i) = (w2(i) - w1(i)) * 0.1;
-    w90(i) = (w2(i) - w1(i)) * 0.9;
+    w10(i) = (w2(i) - w1(i)) * 0.1 + w1(i);
+    w90(i) = (w2(i) - w1(i)) * 0.9 + w1(i);
 end
 iq_p
 iq_n
