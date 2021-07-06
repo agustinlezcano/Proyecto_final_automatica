@@ -5,6 +5,12 @@ Jl = 0.2520; %+/- 0.1260 [kg.m^2]
 bl = 0; %+/-0.0630 [N.m/rad/s]
 Tl = 0; %+/- 6.28 [N.m] Asumir funcion escalon
 %Descomentar para variacion de parametros de carga
+%Variación positiva
+Jl = 0.2520; %+/- 0.1260 [kg.m^2]
+bl = 0; %+/-0.0630 [N.m/rad/s]
+%Variacion negativa
+Jl = 0.2520; %+/- 0.1260 [kg.m^2]
+bl = 0; %+/-0.0630 [N.m/rad/s]
 
 %Tren de transmision
 r = 314.3008;   %reduccion total 314.3008:1
@@ -50,6 +56,8 @@ Kd = Jeq*n*w_pos;
 Kp = Kd*w_pos;
 Ki = Kp*w_pos/n;
 
+K_omega_o = 10223018.9;
+K_tita_o =  6397.3456;
 
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
 % figure()
