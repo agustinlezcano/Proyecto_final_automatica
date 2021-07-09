@@ -56,9 +56,14 @@ Kd = Jeq*n*w_pos;
 Kp = Kd*w_pos;
 Ki = Kp*w_pos/n;
 
-K_omega_o = 10223018.9;
-K_tita_o =  6397.3456;
-K_i_o = 0;
+% Valores de Kw y de Ktheta sin tener en cuenta el integrador en el
+% observador
+% K_omega_o = 10223018.9;
+% K_tita_o =  6397.3456;
+
+K_omega_o = 3.2768e10;
+K_tita_o = 9600;
+K_i_o = 3.072e7;
 
 
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;

@@ -1,6 +1,7 @@
 %% Determinacion de polos y ceros del sistema (sistema LTI equivalente
 % aumentado)
 %Funcion de transferencia 1
+Rs = R_Ref;
 NUM1 = [0 0 0 (3/2)*Pp*lambda_m];
 DEN1 = [(Jeq*Lq) (Jeq*Rs+Beq*Lq) (Beq*Rs+(3/2)*Pp^2*lambda_m^2) 0];
 
@@ -170,3 +171,24 @@ w_p
 w_n
 w10
 w90
+
+%% Cálculo de Kio para observador
+
+syms Ki_o K_o Kw_o s
+
+M_A_o = [0 1 0;
+        0 0 1;
+        0 0 0];
+    
+M_C_o = [1 0 0];
+
+K = [K_o; Ki_o; Kw_o];
+
+EC_obs = collect((det(s*eye(3) - (M_A_o-K*M_C_o))),s)
+expand((s+3200)^3)
+
+
+% vars = [Ki_o K_o Kw_o];
+% eq1=solve(eqns, vars)
+% eq1.double
+%s^3+3*s^2*3200+3*s*3200^2+3200^3
