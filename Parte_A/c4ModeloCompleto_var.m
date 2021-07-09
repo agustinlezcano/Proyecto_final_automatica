@@ -58,6 +58,8 @@ Ki = Kp*w_pos/n;
 
 K_omega_o = 10223018.9;
 K_tita_o =  6397.3456;
+K_i_o = 0;
+
 
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
 % figure()
