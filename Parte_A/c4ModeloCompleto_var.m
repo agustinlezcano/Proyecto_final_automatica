@@ -5,13 +5,6 @@ Jl = 0.2520; %+/- 0.1260 [kg.m^2]
 bl = 0; %+/-0.0630 [N.m/rad/s]
 Tl = 0; %+/- 6.28 [N.m] Asumir funcion escalon
 %Descomentar para variacion de parametros de carga
-%Variación positiva
-Jl = 0.2520; %+/- 0.1260 [kg.m^2]
-bl = 0; %+/-0.0630 [N.m/rad/s]
-%Variacion negativa
-Jl = 0.2520; %+/- 0.1260 [kg.m^2]
-bl = 0; %+/-0.0630 [N.m/rad/s]
-
 %Tren de transmision
 r = 314.3008;   %reduccion total 314.3008:1
 wl_nom = 2.2;   %[rad/s] Velocidad nominal (salida)->21 rpm
@@ -42,8 +35,7 @@ Beq = bm+(bl)/r^2;
 Jeq = Jm+(Jl/r^2);
 
 TREF = 40;
-
-id0 = 0.5; %-0.5
+id0 = +0.5; 
 
 %Resistencias para control proporcional del modulador de torque
 Rq=29;
@@ -61,11 +53,12 @@ Ki = Kp*w_pos/n;
 % K_omega_o = 10223018.9;
 % K_tita_o =  6397.3456;
 
-K_omega_o = 3.2768e10;
+% Valores de Ki, Ktita, Komega agregando integrador en observador
+K_w_o = 3.2768e10;
 K_tita_o = 9600;
 K_i_o = 3.072e7;
 
-
+%Curvas parametricas
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
 % figure()
 % plot(SCOPE_T,SCOPE_omega)
