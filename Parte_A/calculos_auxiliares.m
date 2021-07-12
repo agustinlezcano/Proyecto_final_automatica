@@ -100,16 +100,27 @@ M_cont = simplify([M_B M_A*M_B (M_A*M_A)*(M_B)])
 M_obs = simplify([M_C;
          M_C*M_A;
          M_C*(M_A*M_A)])
-
-fprintf('Matriz de controlabilidad para LTI aumentado')
 M_A_2=[0 1 0 0; 
           0 (-b_eq/j_eq) ((3*P_p*lam_m)/(2*j_eq)) 0;
-          0 ((P_p*lam_m)/(j_eq)) -R_s/L_q 0;
-          0 0 0 (-R_s/L_d)];
+          0 0 0 (-R_s/L_d);
+          0 ((P_p*lam_m)/(j_eq)) -R_s/L_q 0];
 M_B_2=[0;
-     0;
+         0;
      1/L_q;
      0];
+ M_C_2=[1 0 0 1];
+fprintf('Matriz de observabilidad para LTI aumentado')
+M_obs_aumentado = simplify([M_C_2; M_C_2*M_A_2; M_C_2*M_A_2^2; M_C_2*M_A_2^3])
+if (rank(M_obs_aumentado)<4)
+    fprintf('Sistema LTI aumentado NO completamente observable')
+    rank(M_obs_aumentado)
+else
+    fprintf('Sistema LTI aumentado completamente observable')
+    rank(M_obs_aumentado)
+end
+
+
+fprintf('\nMatriz de controlabilidad para LTI aumentado')
 
 M_cont_2 = simplify([M_B_2 M_A_2*M_B_2 (M_A_2*M_A_2)*(M_B_2)])
  
