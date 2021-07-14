@@ -1,4 +1,6 @@
 *.slxc
+*.original
+*.autosave
 Parte_A/slprj/
 Parte_B/slprj/ 
 slprj/
