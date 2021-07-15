@@ -101,15 +101,15 @@ M_obs = simplify([M_C;
          M_C*M_A;
          M_C*(M_A*M_A)])
 %% Parte 2- Ejercicio 2- Polos del controlador
-format longg
-Jl = [0.2520 (0.2520+0.1260) (0.2520-0.1260)];
-bl = [0 0.0630 -0.0630];
-num_2tita = zeros(3,4);
-den_2=zeros(3,4);
-num_2TL=zeros(3,2);
+% format longg
+% Jl = [0.2520 (0.2520+0.1260) (0.2520-0.1260)];
+% bl = [0 0.0630 -0.0630];
+% num_2tita = zeros(3,4);
+% den_2=zeros(3,4);
+% num_2TL=zeros(3,2);
 
-Beq = bm+(bl)/r^2;
-Jeq = Jm+(Jl/r^2);
+%Beq = bm/r^2;
+%Jeq = Jm/r^2;
 
 w_pos = 800;
 n = 2.5;
@@ -117,25 +117,70 @@ Kd = Jeq*n*w_pos;
 Kp = Kd*w_pos;
 Ki = Kp*w_pos/n;
 
+num_Controlador = [0 Kd Kp Ki];
+den_Controlador = [Jeq Kd Kp Ki];
+num_2TL = [1 0];
 
-for i=1:3
-    num_2tita(i,:) = [0 Kd(i) Kp(i) Ki(i)];
-    den_2(i,:) = [Jeq(i) Kd(i) Kp(i) Ki(i)];
-    num_2TL(i,:) = [1 0];
-end
+[Z1,P1,K1] = tf2zp(num_Controlador,den_Controlador)
+H2a=tf(num_Controlador, den_Controlador);
 
-[Z1,P1,K1] = tf2zp(num_2tita(1,:),den_2(1,:))
-H2a=tf(num_2tita(1,:), den_2(1,:));
+num_Corriente = [0 1];
+den_Corriente = [1 5000];
+[Z_corriente,P_Corriente,K_Corriente] = tf2zp(num_Corriente,den_Corriente)
+H2b=tf(num_Corriente, den_Corriente);
 
-[Z2,P2,K2] = tf2zp(num_2tita(2,:),den_2(2,:))
-H2b=tf(num_2tita(2,:), den_2(2,:));
-
-[Z3,P3,K3] = tf2zp(num_2tita(3,:),den_2(3,:))
-H2c=tf(num_2tita(3,:), den_2(3,:));
 
 figure()
-pzmap(H2a,H2c)
+pzplot(H2,'r',H2a,'g',H2b,'b')   %Planta, PID, Corriente
+title('Polos y ceros del sistema')
+legend('Planta original', 'Controlador PID', 'Reg. Corriente')
 grid on
+
+% Variacion de parametros
+%Superior
+Jl = 0.2520+0.1260;
+bl = 0.0630;
+Beq = bm+(bl)/r^2;
+Jeq = Jm+(Jl/r^2);
+
+DENp = [(Jeq*Lq) (Jeq*Rs+Beq*Lq) (Beq*Rs+(3/2)*Pp^2*lambda_m^2) 0];
+NUMp = [0 0 Lq Rs];
+DENp = r*DENp;
+
+[Z_p,P_p,K_p] = tf2zp(NUMp,DENp)
+Hp=tf(NUMp, DENp);
+
+%Inferior
+Jl = 0.2520-0.1260;
+bl = -0.0630;
+Beq = bm+(bl)/r^2;
+Jeq = Jm+(Jl/r^2);
+
+DENn = [(Jeq*Lq) (Jeq*Rs+Beq*Lq) (Beq*Rs+(3/2)*Pp^2*lambda_m^2) 0];
+NUMn = [0 0 Lq Rs];
+DENn = r*DENn;
+
+[Z_n,P_n,K_n] = tf2zp(NUMn,DENn)
+Hn=tf(NUMn, DENn);
+
+figure()
+pzplot(H2,'r',Hp,'g',Hn,'b')   %Planta original, variacion positiva, variacion negativa
+title('Variacion extrema de parametros de carga')
+legend('Valores nominales','Variacion superior','Variacion inferior')
+grid on
+
+% for i=1:3
+%     num_2tita(i,:) = [0 Kd(i) Kp(i) Ki(i)];
+%     den_2(i,:) = [Jeq(i) Kd(i) Kp(i) Ki(i)];
+%     num_2TL(i,:) = [1 0];
+% end
+
+% [Z2,P2,K2] = tf2zp(num_2tita(2,:),den_2(2,:))
+% H2b=tf(num_2tita(2,:), den_2(2,:));
+% 
+% [Z3,P3,K3] = tf2zp(num_2tita(3,:),den_2(3,:))
+% H2c=tf(num_2tita(3,:), den_2(3,:));
+
 % num_2tita = [0 Kd Kp Ki];
 % den_2 = [Jeq Kd Kp Ki];
 % num_2TL = [1 0];
