@@ -2,7 +2,7 @@
 %Parametros del sistema
 %Carga mecanica
 Jl = 0.2520; %+/- 0.1260 [kg.m^2]
-bl = 0; %+/-0.0630 [N.m/rad/s]
+bl = 0-0.0630; %+/-0.0630 [N.m/rad/s]
 Tl = 0; %+/- 6.28 [N.m] Asumir funcion escalon
 %Descomentar para variacion de parametros de carga
 %Tren de transmision
