@@ -50,13 +50,13 @@ Ki = Kp*w_pos/n;
 
 % Valores de Kw y de Ktheta sin tener en cuenta el integrador en el
 % observador
-K_w_o = 3200^2;
-K_tita_o =  6400;
+%K_w_o = 3200^2;
+%K_tita_o =  6400;
 
 % Valores de Ki, Ktita, Komega agregando integrador en observador
-%K_w_o = 3.2768e10;
-%K_tita_o = 9600;
-%K_i_o = 3.072e7;
+K_w_o = 3.2768e10;
+K_tita_o = 9600;
+K_i_o = 3.072e7;
 
 %Curvas parametricas
 % SCOPE_T = ScopeData1toeque_velocidad.signals(2).values;
