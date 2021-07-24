@@ -193,7 +193,7 @@ M_A_o = [0 1 0;
     
 M_C_o = [1 0 0];
 
-K = [K_o; Ki_o; Kw_o];
+K = [K_o;  Kw_o; Ki_o;];
 
 EC_obs = collect((det(s*eye(3) - (M_A_o-K*M_C_o))),s)
 expand((s+3200)^3)
